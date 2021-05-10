@@ -6126,11 +6126,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\GrapQL\\GrapQL\\GrapQL.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\GrapQL\\GrapQL\\GrapQL\\GrapQL.csproj",
       "projectName": "GrapQL",
-      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\GrapQL\\GrapQL\\GrapQL.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\GrapQL\\GrapQL\\GrapQL\\GrapQL.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\GrapQL\\GrapQL\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\GrapQL\\GrapQL\\GrapQL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

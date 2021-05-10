@@ -24,5 +24,30 @@ namespace GrapQL.Repository
             var accounts = await _context.Accounts.Where(a => ownerIds.Contains(a.OwnerId)).ToListAsync();
             return accounts.ToLookup(x => x.OwnerId);
         }
+        public Account GetById(Guid id) => _context.Accounts.SingleOrDefault(o => o.Id.Equals(id));
+        public IEnumerable<Account> GetAll(int pageIndex, int pageSize)
+        {
+            return _context.Accounts.FromSqlRaw("EXEC [spGetAllAccount] @PageIndex, @PageSize", parameters: new[] { pageIndex, pageSize }).ToList();
+        }
+        public Account CreateAccount(Account account)
+        {
+            account.Id = Guid.NewGuid();
+            _context.Add(account);
+            _context.SaveChanges();
+            return account;
+        }
+        public Account UpdateAccount(Account dbAccount, Account account)
+        {
+            dbAccount.Description = account.Description;
+            dbAccount.Type = account.Type;
+            dbAccount.OwnerId = account.OwnerId;
+            _context.SaveChanges();
+            return dbAccount;
+        }
+        public void DeleteAccount(Account account)
+        {
+            _context.Remove(account);
+            _context.SaveChanges();
+        }
     }
 }
