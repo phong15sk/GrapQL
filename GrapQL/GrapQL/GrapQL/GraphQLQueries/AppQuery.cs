@@ -1,6 +1,7 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using GrapQL.Contracts;
+using GrapQL.GrapQL.GraphQLType;
 using GrapQL.Model;
 using GrapQL.Repository;
 using System;
@@ -22,7 +23,14 @@ namespace GrapQL.GrapQL.GraphQLQueries
 
             Field<ListGraphType<OwnerType>>(
                "owners",
-               resolve: context => _ownerrepository.GetAll()
+               arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<PaginationInputType>> { Name = "Pagination" }
+                ),
+               resolve: context =>
+               {
+                   var page = context.GetArgument<Pagination>("Pagination");
+                   return _ownerrepository.GetAll(page.PageIndex, page.PageSize);
+               }
             );
             Field<OwnerType>(
             "owner",
@@ -41,13 +49,12 @@ namespace GrapQL.GrapQL.GraphQLQueries
             Field<ListGraphType<AccountType>>(
                "accounts",
                 arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "pageIndex" },
-                new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "pageSize" }),
+                new QueryArgument<NonNullGraphType<PaginationInputType>> { Name = "Pagination" }
+                ),
                resolve: context =>
                {
-                   int pageIndex = int.Parse(context.GetArgument<StringGraphType>("pageIndex").ToString());
-                   int pageSize = int.Parse(context.GetArgument<StringGraphType>("pageSize").ToString());
-                   return _accountRepository.GetAll(pageIndex, pageSize);
+                   var page = context.GetArgument<Pagination>("Pagination");
+                   return _accountRepository.GetAll(page.PageIndex, page.PageSize);
                }
             );
         }

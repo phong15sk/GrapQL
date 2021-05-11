@@ -27,7 +27,7 @@ namespace GrapQL.Repository
         public Account GetById(Guid id) => _context.Accounts.SingleOrDefault(o => o.Id.Equals(id));
         public IEnumerable<Account> GetAll(int pageIndex, int pageSize)
         {
-            return _context.Accounts.FromSqlRaw("EXEC [spGetAllAccount] @PageIndex, @PageSize", parameters: new[] { pageIndex, pageSize }).ToList();
+            return _context.Accounts.FromSqlInterpolated($"spGetAllAccount {pageIndex}, {pageSize}").ToList();
         }
         public Account CreateAccount(Account account)
         {

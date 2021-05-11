@@ -1,6 +1,7 @@
 ﻿using GrapQL.Contracts;
 using GrapQL.Entities.Context;
 using GrapQL.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,10 @@ namespace GrapQL.Repository
         {
             _context = context;
         }
-        public IEnumerable<Owner> GetAll() => _context.Owners.ToList();
+        public IEnumerable<Owner> GetAll(int pageIndex, int pageSize)
+        {
+            return _context.Owners.FromSqlInterpolated($"spGetAllOwner {pageIndex}, {pageSize}").ToList();
+        }
         public Owner GetById(Guid id) => _context.Owners.SingleOrDefault(o => o.Id.Equals(id));
         public Owner CreateOwner(Owner owner)
         {
