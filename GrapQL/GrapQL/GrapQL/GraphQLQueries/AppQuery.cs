@@ -33,7 +33,7 @@ namespace GrapQL.GrapQL.GraphQLQueries
                }
             );
             Field<OwnerType>(
-            "owner",
+              "owner",
             arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "ownerId" }),
             resolve: context =>
             {
@@ -57,6 +57,20 @@ namespace GrapQL.GrapQL.GraphQLQueries
                    return _accountRepository.GetAll(page.PageIndex, page.PageSize);
                }
             );
+            Field<AccountType>(
+              "account",
+           arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "accountId" }),
+           resolve: context =>
+           {
+               Guid id;
+               if (!Guid.TryParse(context.GetArgument<string>("accountId"), out id))
+               {
+                   context.Errors.Add(new ExecutionError("Wrong value for guid"));
+                   return null;
+               }
+               return _accountRepository.GetById(id);
+           }
+           );
         }
     }
 }
