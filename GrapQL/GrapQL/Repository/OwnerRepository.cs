@@ -40,6 +40,12 @@ namespace GrapQL.Repository
             _context.Remove(owner);
             _context.SaveChanges();
         }
+        public TotalRow GetTotalRow()
+        {
+            var totalRow = new TotalRow();
+            totalRow.Total = _context.Owners.Count();
+            return totalRow;
+        }
     }
 }
 

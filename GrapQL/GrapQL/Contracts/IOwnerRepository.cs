@@ -13,5 +13,6 @@ namespace GrapQL.Contracts
         Owner CreateOwner(Owner owner);
         Owner UpdateOwner(Owner dbOwner, Owner owner);
         void DeleteOwner(Owner owner);
+        TotalRow GetTotalRow();
     }
 }

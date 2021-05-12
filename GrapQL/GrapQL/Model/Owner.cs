@@ -13,7 +13,6 @@ namespace GrapQL.Model
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
         public string Address { get; set; }
-        public int TotalRecords { get; set; }
         public ICollection<Account> Accounts { get; set; }
     }
 }

@@ -46,6 +46,13 @@ namespace GrapQL.GrapQL.GraphQLQueries
                 return _ownerrepository.GetById(id);
             }
             );
+            Field<TotalRowType>(
+               "getTotalRow",
+               resolve: context =>
+               {
+                   return _ownerrepository.GetTotalRow();
+               }
+            );
             Field<ListGraphType<AccountType>>(
                "accounts",
                 arguments: new QueryArguments(
@@ -71,6 +78,7 @@ namespace GrapQL.GrapQL.GraphQLQueries
                return _accountRepository.GetById(id);
            }
            );
+
         }
     }
 }
