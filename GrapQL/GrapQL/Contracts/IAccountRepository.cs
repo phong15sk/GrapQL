@@ -15,5 +15,6 @@ namespace GrapQL.Contracts
         Account CreateAccount(Account account);
         Account UpdateAccount(Account dbAccount, Account account);
         void DeleteAccount(Account account);
+        TotalRow GetTotalRow();
     }
 }

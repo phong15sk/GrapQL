@@ -49,5 +49,11 @@ namespace GrapQL.Repository
             _context.Remove(account);
             _context.SaveChanges();
         }
+        public TotalRow GetTotalRow()
+        {
+            var totalRow = new TotalRow();
+            totalRow.Total = _context.Accounts.Count();
+            return totalRow;
+        }
     }
 }

@@ -47,12 +47,19 @@ namespace GrapQL.GrapQL.GraphQLQueries
             }
             );
             Field<TotalRowType>(
-               "getTotalRow",
+               "getTotalRowOwner",
                resolve: context =>
                {
                    return _ownerrepository.GetTotalRow();
                }
             );
+            Field<TotalRowType>(
+             "getTotalRowAcount",
+             resolve: context =>
+             {
+                 return _accountRepository.GetTotalRow();
+             }
+          );
             Field<ListGraphType<AccountType>>(
                "accounts",
                 arguments: new QueryArguments(
